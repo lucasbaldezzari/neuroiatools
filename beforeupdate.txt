@@ -1,0 +1,27 @@
+****** IMPORTANTE ******
+
+Antes de subir una versión nueva a Pypi, ejecutar los siguientes pasos:
+
+++++ Actualización de README.md ++++
+
+1. Actualizar el archivo README.md informando los cambios y/o nuevas características de la librería.
+
+++++ Actualización de versión de la librería ++++
+
+2. Actualizar la versión del package en los archivos, version.py y pyproject.toml.
+
+++++ Generando paquetes ++++
+
+3. Dentro de la carpeta raíz, ejecutar, 
+    3.1 python setup.py sdist bdist_wheel
+    3.2 twine check dist/*
+
+Si el punto 3.2 pasa correctamente, ejecutar
+
+    3.3 twine upload dist/*
+
+++++ Actualizando repositorio ++++
+
+Una vez actualizado el paquete en pypi se debe actualizar el repositorio en github.
+
+4. Realizar un commit. NO OLVIDAR colocar la versión en el commit. Se recomienda comenzar el mensaje del commit con la versión del paquete.

@@ -8,6 +8,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 - [MSc. BALDEZZARI Lucas](https://www.linkedin.com/in/lucasbaldezzari/) (lucas.baldezzari@utec.edu.uy).
 
-### Colaboradores
+### Versiones
 
-ADD
+#### Versión x.y.z
