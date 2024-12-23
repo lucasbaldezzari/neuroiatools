@@ -1,0 +1,13 @@
+README.md
+license.txt
+pyproject.toml
+setup.py
+neuroiatools/__init__.py
+neuroiatools/version.py
+neuroiatools.egg-info/PKG-INFO
+neuroiatools.egg-info/SOURCES.txt
+neuroiatools.egg-info/dependency_links.txt
+neuroiatools.egg-info/requires.txt
+neuroiatools.egg-info/top_level.txt
+neuroiatools/EEGManager/TrialsHandler.py
+neuroiatools/EEGManager/__init__.py

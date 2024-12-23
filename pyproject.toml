@@ -1,0 +1,29 @@
+[project]
+name = "neuroiatools"
+
+version = "1.0.1"
+
+authors = [
+  {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"},]
+maintainers = [
+  {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"}
+]
+
+dependencies = [
+  "numpy",
+  "mne",
+  "matplotlib",
+  "pandas",
+  "scipy",
+  "scikit-learn",
+  "seaborn",
+]
+
+readme = "README.md"
+
+license = {text = "MIT License"}
+
+keywords = ["eeg","signal processing","bci"]
+
+[project.urls]
+Documentation = "https://github.com/lucasbaldezzari/neuroiatools/blob/main/docs.md"

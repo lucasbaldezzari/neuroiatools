@@ -1,0 +1,9 @@
+python>=3.10
+numpy
+matplotlib
+seaborn
+pandas
+h5py
+scipy
+scikit-learn
+mne

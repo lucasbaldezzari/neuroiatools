@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: neuroiatools
+Version: 1.0.1
+Home-page: https://github.com/lucasbaldezzari/neuroiatools
+Author: LUCAS BALDEZZARI
+Author-email: Lucas Baldezzari <lucas.baldezzari@utec.edu.uy>
+Maintainer-email: Lucas Baldezzari <lucas.baldezzari@utec.edu.uy>
+License: MIT License
+Project-URL: Documentation, https://github.com/lucasbaldezzari/neuroiatools/blob/main/docs.md
+Keywords: eeg,signal processing,bci
+Description-Content-Type: text/markdown
+License-File: license.txt
+Requires-Dist: numpy
+Requires-Dist: mne
+Requires-Dist: matplotlib
+Requires-Dist: pandas
+Requires-Dist: scipy
+Requires-Dist: scikit-learn
+Requires-Dist: seaborn
+
+# Neuro-IA Lab tools
+
+<img align="right" src="neuroialogo.png" alt="Neuro-IA Lab" width="210">
+
+Herramientas de procesamiento y análisis de señales de Electroencefalografía (EEG) del *"Laboratorio de Neurociencias e Ingeligencia Artificial Aplicada"* de la [Universidad Tecnológica](https://utec.edu.uy/en/) del Uruguay.
+
+### Autor
+
+- [MSc. BALDEZZARI Lucas](https://www.linkedin.com/in/lucasbaldezzari/) (lucas.baldezzari@utec.edu.uy).
+
+### Versiones
+
+#### Versión 1.0.1
+
+- Se corrige readme.md
+- Se crea scope en pypi
+
+#### Versión 1.0.0
+
+- Se implementa TrialsHandler.
