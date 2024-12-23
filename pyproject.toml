@@ -1,6 +1,6 @@
 [project]
 name = "neuroiatools"
-version = "1.1.1"
+version = "1.1.2"
 
 authors = [
   {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"}
@@ -43,6 +43,9 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.package-data]
 # Incluir archivos de datasets en tiempo de ejecución
 "neuroiatools.datasets" = ["*.txt", "*.npy", "*.h5"]
+
+[tool.setuptools]
+include-package-data = true
 
 [project.urls]
 Documentation = "https://github.com/lucasbaldezzari/neuroiatools/blob/main/docs.md"

@@ -1,3 +1,7 @@
+#### 1.1.2
+
+- Se agrega __init__.py dentro de datasets. Se modifica archivo .toml
+
 #### Versión 1.1.1
 
 - Se modifican nombres de los archivos dentro de datasets.

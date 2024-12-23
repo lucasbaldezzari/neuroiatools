@@ -14,7 +14,7 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.1
+#### 1.1.2
 
-- Se modifican nombres de los archivos dentro de datasets para hacerlos más legible.
+- Se agrega __init__.py dentro de datasets. Se modifica archivo .toml
 

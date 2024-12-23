@@ -5,3 +5,5 @@
 /.vscode
 
 /neuroiatools/__pycache__
+/neuroiatools/EEGManager/__pycache__
+/neuroiatools/utils/__pycache__

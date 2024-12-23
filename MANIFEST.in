@@ -1,0 +1,3 @@
+include neuroiatools/datasets/*.npy
+include neuroiatools/datasets/*.h5
+include neuroiatools/datasets/*.txt

@@ -21,9 +21,9 @@ def load_file(filename, file_type=None):
         file_type = filename.split('.')[-1].lower()
     
     try:
-        if file_type == 'txt':
-            with resources.open_text(datasets, filename) as f:
-                return f.read()
+        if file_type == 'txt':##abro como pandas
+            with resources.path(datasets, filename) as path:
+                return pd.read_csv(path)
         elif file_type == 'npy':
             with resources.path(datasets, filename) as path:
                 return np.load(path, allow_pickle=True)

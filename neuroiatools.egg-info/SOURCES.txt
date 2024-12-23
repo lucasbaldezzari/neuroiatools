@@ -1,3 +1,4 @@
+MANIFEST.in
 README.md
 license.txt
 pyproject.toml
@@ -11,5 +12,7 @@ neuroiatools.egg-info/requires.txt
 neuroiatools.egg-info/top_level.txt
 neuroiatools/EEGManager/TrialsHandler.py
 neuroiatools/EEGManager/__init__.py
+neuroiatools/datasets/__init__.py
+neuroiatools/datasets/executed_tasks_events.txt
 neuroiatools/utils/__init__.py
-neuroiatools/utils/utils.py
+neuroiatools/utils/load_file.py
