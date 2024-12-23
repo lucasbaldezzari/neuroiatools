@@ -1,3 +1,11 @@
+#### 1.1.4
+
+- Se cambia nombre el nombre del módulo download_dataset por datasetManager
+
+#### 1.1.3
+
+- Se implementa función *download_data* para descargar datos directamente del repositorio. Se elimina función *load_file*.
+
 #### 1.1.2
 
 - Se agrega __init__.py dentro de datasets. Se modifica archivo .toml
