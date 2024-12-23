@@ -4,7 +4,8 @@ Antes de subir una versión nueva a Pypi, ejecutar los siguientes pasos:
 
 ++++ Actualización de README.md ++++
 
-1. Actualizar el archivo README.md informando los cambios y/o nuevas características de la librería.
+1.1 Actualizar el archivo readme.md informando los cambios de la última versión.
+1.2 Actualizar el archivo versiones.md informando los cambios y/o nuevas características de la librería.
 
 ++++ Actualización de versión de la librería ++++
 

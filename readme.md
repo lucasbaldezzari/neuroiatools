@@ -12,17 +12,9 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 - [MSc. BALDEZZARI Lucas](https://www.linkedin.com/in/lucasbaldezzari/) (lucas.baldezzari@utec.edu.uy).
 
-### Versiones
+### Última versión
 
-#### Versión 1.1.0
+#### 1.1.1
 
-- Se agrega función *load_file* dentro de un nuevo módulo llamado *utils*. Permite cargar los archivos dentro de la carpeta *datasets*.
+- Se modifican nombres de los archivos dentro de datasets para hacerlos más legible.
 
-#### Versión 1.0.1
-
-- Se corrige readme.md
-- Se crea scope en pypi
-
-#### Versión 1.0.0
-
-- Se implementa TrialsHandler.
