@@ -11,3 +11,5 @@ neuroiatools.egg-info/requires.txt
 neuroiatools.egg-info/top_level.txt
 neuroiatools/EEGManager/TrialsHandler.py
 neuroiatools/EEGManager/__init__.py
+neuroiatools/utils/__init__.py
+neuroiatools/utils/utils.py

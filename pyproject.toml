@@ -1,29 +1,50 @@
 [project]
 name = "neuroiatools"
-
-version = "1.0.1"
+version = "1.1.0"
 
 authors = [
-  {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"},]
+  {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"}
+]
 maintainers = [
   {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"}
 ]
 
+description = "Tools for EEG processing and analysis"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["eeg", "signal processing", "bci", "neurotechnology", "data analysis"]
+
 dependencies = [
-  "numpy",
-  "mne",
-  "matplotlib",
-  "pandas",
-  "scipy",
-  "scikit-learn",
-  "seaborn",
+  "numpy>=2.0.1",
+  "mne>=1.9.0",
+  "matplotlib>=3.4.0",
+  "pandas>=2.2.2",
+  "scipy>=1.7.0",
+  "scikit-learn>=0.24.0",
+  "seaborn>=0.11.0",
+  "h5py>=3.0.0"
 ]
 
-readme = "README.md"
+[project.optional-dependencies]
+tests = [
+  "pytest",
+  "pytest-cov"
+]
+dev = [
+  "black",
+  "flake8",
+  "mypy"
+]
 
-license = {text = "MIT License"}
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
 
-keywords = ["eeg","signal processing","bci"]
+[tool.setuptools.package-data]
+# Incluir archivos de datasets en tiempo de ejecución
+"neuroiatools.datasets" = ["*.txt", "*.npy", "*.h5"]
 
 [project.urls]
 Documentation = "https://github.com/lucasbaldezzari/neuroiatools/blob/main/docs.md"
+Source = "https://github.com/lucasbaldezzari/neuroiatools"
+Tracker = "https://github.com/lucasbaldezzari/neuroiatools/issues"
