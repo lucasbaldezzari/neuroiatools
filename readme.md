@@ -14,7 +14,7 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.4
+#### 1.1.5
 
-- Se cambia nombre el nombre del módulo download_dataset por datasetManager
+- Modificaciones menores en *download_dataset* para descargar directamente desde la datasets que se encuentra en la carpeta principal del repositorio.
 

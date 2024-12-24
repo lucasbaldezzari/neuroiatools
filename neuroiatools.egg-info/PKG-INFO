@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: neuroiatools
-Version: 1.1.4
+Version: 1.1.5
 Summary: Tools for EEG processing and analysis
 Home-page: https://github.com/lucasbaldezzari/neuroiatools
 Author: LUCAS BALDEZZARI
@@ -45,7 +45,7 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.4
+#### 1.1.5
 
-- Se cambia nombre el nombre del módulo download_dataset por datasetManager
+- Modificaciones menores en *download_dataset* para descargar directamente desde la datasets que se encuentra en la carpeta principal del repositorio.
 

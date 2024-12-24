@@ -1,7 +1,7 @@
 import requests
 from pathlib import Path
 
-def download_data(file_name, save_dir="datasets", repo_url="https://github.com/lucasbaldezzari/neuroiatools/tree/main/neuroiatools/datasets"):
+def download_data(file_name, save_dir="datasets", repo_url="https://github.com/lucasbaldezzari/neuroiatools/tree/main/datasets"):
     """
     Descarga un archivo de datos desde un repositorio de GitHub y lo guarda localmente.
     
@@ -16,6 +16,8 @@ def download_data(file_name, save_dir="datasets", repo_url="https://github.com/l
     # Crear el directorio si no existe
     save_path = Path(save_dir)
     save_path.mkdir(parents=True, exist_ok=True)
+
+    print(save_path)
     
     # URL completa del archivo
     file_url = f"{repo_url}/{file_name}"

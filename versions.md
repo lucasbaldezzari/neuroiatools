@@ -1,3 +1,7 @@
+#### 1.1.5
+
+- Modificaciones menores en *download_dataset* para descargar directamente desde la datasets que se encuentra en la carpeta principal del repositorio.
+
 #### 1.1.4
 
 - Se cambia nombre el nombre del módulo download_dataset por datasetManager
