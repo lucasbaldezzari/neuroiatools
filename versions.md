@@ -1,3 +1,7 @@
+#### 1.1.7
+
+- Se modifica TrialsHandler para evitar errores a la hora de obtener los índices iniciales y finales para generar los trials a partir de tmin y tmax.
+
 #### 1.1.6
 
 - Modificaciones menores en *download_dataset* para descargar correctamente los archivos y no en HTML. Se agrega barra de porcentaje descargado.

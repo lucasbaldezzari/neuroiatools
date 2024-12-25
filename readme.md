@@ -14,7 +14,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.6
+#### 1.1.7
 
-- Modificaciones menores en *download_dataset* para descargar correctamente los archivos y no en HTML. Se agrega barra de porcentaje descargado.
-
+- Se modifica TrialsHandler para evitar errores a la hora de obtener los índices iniciales y finales para generar los trials a partir de tmin y tmax.

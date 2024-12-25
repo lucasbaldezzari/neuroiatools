@@ -17,10 +17,10 @@ class TrialsHandler():
             - trialsToRemove (list): lista de trials a remover. Si es None, no se remueven trials.
             """
         
-        if not isinstance(self.rawEEG, np.ndarray):
+        if not isinstance(rawEEG, np.ndarray):
             raise TypeError("rawEEG debe ser un array de numpy")
         self.rawEEG = rawEEG
-        if not isinstance(self.timeEvents, np.ndarray):
+        if not isinstance(timeEvents, np.ndarray):
             raise TypeError("timeEvents debe ser un array de numpy")
         self.timeEvents = timeEvents
         self.sfreq = sfreq
@@ -35,32 +35,30 @@ class TrialsHandler():
         self.rejectedTrials = None
         if reject is not None:
             self._rejectTrials()
-            
+
     def getTrials(self):
         """Función para extraer los trials dentro de self.rawEEG"""
-        
+
         if self.tmin > self.tmax:
             raise ValueError("tmin debe ser menor que tmax")
-        
-        init_idx = np.astype(np.round((self.timeEvents + self.tmin)*self.sfreq), int)
-        end_idx = np.astype(np.round((self.timeEvents + self.tmax)*self.sfreq), int)
-        ##concateno en time_idx los indices de inicio y fin de cada trial como para obtener un array de la forma [[init1, end1], [init2, end2], ...]
-        time_idx = np.vstack((init_idx, end_idx))
-        if len(init_idx) == 1:
-            time_idx = time_idx.reshape(1,2)
 
-        if self.tmin < 0:
-            offset = np.abs(self.tmin) + self.tmax
-            trials = np.zeros((len(time_idx), self.rawEEG.shape[0], int(offset*self.sfreq)))
-            for i, idxs in enumerate(time_idx):
-                trials[i] = self.rawEEG[:, idxs[0]:idxs[1]]
-        else:
-            offset = np.astype(np.round((self.tmax - self.tmin)*self.sfreq), int)
-            trials = np.zeros((len(time_idx), self.rawEEG.shape[0], offset))
-            print(trials.shape)
-            for i, idxs in enumerate(time_idx):
-                print(idxs)
-                trials[i] = self.rawEEG[:, idxs[0]:idxs[1]]
+        init_idx = np.round((self.timeEvents + self.tmin) * self.sfreq).astype(int) #índices de inicio de cada trial
+        end_idx = np.round((self.timeEvents + self.tmax) * self.sfreq).astype(int) #índices de fin de cada trial
+        ## concatenamos en time_idx los índices de inicio y fin de cada trial
+        time_idx = np.vstack((init_idx, end_idx)).T  # transponemos para que tenga forma (n_trials, 2)
+
+        # Tamaño del segmento esperado
+        segment_length = int(round((self.tmax - self.tmin) * self.sfreq)) ##número de muestras en el segmento
+
+        trials = np.zeros((len(init_idx), self.rawEEG.shape[0], segment_length)) ##array de numpy con los trials de la forma [trials, channels, samples]
+
+        for i, (start, end) in enumerate(time_idx):
+            if end - start != segment_length:
+                raise ValueError(
+                    f"El tamaño del segmento ({end - start}) no coincide con el tamaño esperado ({segment_length}) "
+                    f"para el trial {i}."
+                )
+            trials[i] = self.rawEEG[:, start:end]
 
         return trials
     
@@ -117,8 +115,8 @@ if __name__ == "__main__":
     plt.legend()
     plt.show()
     
-    tmin = -0.1
-    tmax = 4
+    tmin = -1
+    tmax = 3
     trialshandler = TrialsHandler(rawEEG, timevents, sfreq, tmin=tmin, tmax=tmax)
 
     trials = trialshandler.trials

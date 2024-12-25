@@ -14,3 +14,4 @@ neuroiatools/EEGManager/TrialsHandler.py
 neuroiatools/EEGManager/__init__.py
 neuroiatools/utils/__init__.py
 neuroiatools/utils/datasetManager.py
+tests/test_trialshandler.py
