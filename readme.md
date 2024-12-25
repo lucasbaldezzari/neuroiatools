@@ -14,7 +14,7 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.5
+#### 1.1.6
 
-- Modificaciones menores en *download_dataset* para descargar directamente desde la datasets que se encuentra en la carpeta principal del repositorio.
+- Modificaciones menores en *download_dataset* para descargar correctamente los archivos y no en HTML. Se agrega barra de porcentaje descargado.
 

@@ -1,3 +1,7 @@
+#### 1.1.6
+
+- Modificaciones menores en *download_dataset* para descargar correctamente los archivos y no en HTML. Se agrega barra de porcentaje descargado.
+
 #### 1.1.5
 
 - Modificaciones menores en *download_dataset* para descargar directamente desde la datasets que se encuentra en la carpeta principal del repositorio.
