@@ -17,13 +17,15 @@ class TrialsHandler():
             - trialsToRemove (list): lista de trials a remover. Si es None, no se remueven trials.
             """
         
+        if not isinstance(self.rawEEG, np.ndarray):
+            raise TypeError("rawEEG debe ser un array de numpy")
         self.rawEEG = rawEEG
+        if not isinstance(self.timeEvents, np.ndarray):
+            raise TypeError("timeEvents debe ser un array de numpy")
         self.timeEvents = timeEvents
         self.sfreq = sfreq
         self.tmin = tmin
         self.tmax = tmax
-
-        self._sanityCheck() ##chequeamos que los parámetros de entrada sean correctos
         
         self.trials = self.getTrials() #array de numpy con los trials de la forma [trials, channels, samples]
         #chequeamos si hay trials que remover
@@ -33,14 +35,7 @@ class TrialsHandler():
         self.rejectedTrials = None
         if reject is not None:
             self._rejectTrials()
-
-    def _sanityCheck(self):
-        """Función para chequear que los parámetros de entrada sean cor rectos"""
-        if not isinstance(self.rawEEG, np.ndarray):
-            raise TypeError("rawEEG debe ser un array de numpy")
-        if not isinstance(self.timeEvents, np.ndarray):
-            raise TypeError("timeEvents debe ser un array de numpy")
-
+            
     def getTrials(self):
         """Función para extraer los trials dentro de self.rawEEG"""
         
@@ -111,8 +106,8 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     ##eeg de prueba
     sfreq = 512
-    rawEEG = rawEEG = np.load("neuroiatools\\data\\rawEEG.npy")
-    timevents = np.load("neuroiatools\\data\\timevents.npy")
+    rawEEG = rawEEG = np.load("datasets\\signal_test_trialshandler.npy")
+    timevents = np.load("datasets\\timevents_signal_test_trialshandler.npy")
 
     ejet = np.arange(0,len(rawEEG[0]))/sfreq
     plt.plot(ejet, rawEEG[0], label="Señal de prueba")
