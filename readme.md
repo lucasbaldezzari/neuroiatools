@@ -14,6 +14,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.7
+#### 1.1.8
 
-- Se modifica TrialsHandler para evitar errores a la hora de obtener los índices iniciales y finales para generar los trials a partir de tmin y tmax.
+- Se implementa clase Filter para filtrar señales. La clase toma la señal y aplica el filtro en el último eje. Aplica primero un pasabanda y luego un notch. No aplica ventana, de momento no deja elegir entre FIR o IIR, por defecto aplica IIR.
