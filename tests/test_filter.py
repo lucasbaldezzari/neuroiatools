@@ -30,7 +30,7 @@ t_fo = 1 #tiempo fade-out
 total_time = t_fi + t_cue + t_fo
 
 ##instancio un objeto de la clase TrialsHandler
-th = TrialsHandler.TrialsHandler(raweeg, time_events, sfreq, tmin=tmin, tmax=tmax)
+th = TrialsHandler.TrialsHandler(raweeg, time_events, sfreq, tmin=tmin, tmax=tmax, reject=None)
 trials = th.trials #obtengo los trials
 
 ejet = np.arange(0, trials.shape[2])/sfreq

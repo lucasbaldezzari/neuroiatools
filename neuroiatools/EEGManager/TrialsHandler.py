@@ -12,7 +12,7 @@ class TrialsHandler():
             - timeEvents (numpy.array): array de numpy con los eventos de tiempo en segundos.
             - sfreq (float): frecuencia de muestreo de la señal de EEG.
             - tmin, tmax: tiempo inicial del trial y tiempo final del trial relativos al timeEvent en segundos.
-            - reject (float): Valor de umbral para rechazar trials. Si el valor absoluto de alguno de los canales
+            - reject (float): Valor de umbral para rechazar trials. Si el valor absoluto Pico a Pico o (Peak to Peak PTP) de alguno de los canales
             supera este valor, el trial es rechazado. Si es None, no se rechazan trials.
             - trialsToRemove (list): lista de trials a remover. Si es None, no se remueven trials.
             """
@@ -33,8 +33,10 @@ class TrialsHandler():
             self.removeTrials(trialsToRemove)
 
         self.rejectedTrials = None
-        if reject is not None:
-            self._rejectTrials()
+        self.channels_exceeded_ptp = None
+        self.reject = reject
+        if self.reject is not None:
+            self.rejectedTrials, self.channels_exceeded_ptp = self._rejectTrials()
 
     def getTrials(self):
         """Función para extraer los trials dentro de self.rawEEG"""
@@ -91,13 +93,38 @@ class TrialsHandler():
             print("Se han removido los trials {}".format(trialsToRemove))
 
     def _rejectTrials(self):
-        """Función para rechazar trials en base a self.reject.
-        Se revisa la amplitud pico a pico de cada trial y si supera el valor de self.reject, se rechaza el trial.
+        """
+        Rechaza los trials en base a la amplitud pico a pico (PTP) máxima permitida.
 
-        Revisar https://github.com/mne-tools/mne-python/blob/maint/1.9/mne/epochs.py#L894 para ver cómo se hace en MNE
-        
-        Retorna una lista con los índices de los trials rechazados"""
-        pass
+        Para cada trial, calcula la amplitud PTP para cada canal. Si el PTP de algún canal en un trial
+        excede el valor de umbral definido en `self.reject`, ese trial es rechazado.
+
+        La idea es sacada de https://mne.tools/stable/generated/mne.Epochs.html
+
+        Retorna:
+            list: Lista de índices de los trials rechazados.
+        """
+
+        rejected_trials = []  # Lista para almacenar los índices de trials rechazados
+        channels_exceeded_ptp = [] ## Lista para almacenar los canales que excedieron el umbral de PTP
+
+        #recorremos los trials
+        for trial_idx, trial in enumerate(self.trials):
+            ptp_values = trial.max(axis=1) - trial.min(axis=1)
+            exceeded_channels = np.where(ptp_values > self.reject)[0]
+            if len(exceeded_channels) > 0:
+                rejected_trials.append(trial_idx)
+                channels_exceeded_ptp.append(exceeded_channels.tolist())
+
+        # Remover los trials rechazados de self.trials
+        self.trials = np.delete(self.trials, rejected_trials, axis=0)
+
+        ## Actualizamos la lista de eventos de tiempo (self.timeEvents) eliminando los rechazados
+        self.timeEvents = np.delete(self.timeEvents, rejected_trials, axis=0)
+
+        print(f"Se han rechazado los siguientes trials por exceder el umbral de PTP: {rejected_trials}")
+
+        return rejected_trials, channels_exceeded_ptp
     
 if __name__ == "__main__":
     import numpy as np
@@ -117,7 +144,7 @@ if __name__ == "__main__":
     
     tmin = -1
     tmax = 3
-    trialshandler = TrialsHandler(rawEEG, timevents, sfreq, tmin=tmin, tmax=tmax)
+    trialshandler = TrialsHandler(rawEEG, timevents, sfreq, tmin=tmin, tmax=tmax, reject=3)
 
     trials = trialshandler.trials
     ejet = np.arange(0,trials.shape[2])/sfreq+timevents[0]+tmin

@@ -1,3 +1,7 @@
+#### 1.1.9
+
+- Se implementa y testea método _rejectTrials de la clase TrialsHandler. 
+
 #### 1.1.8
 
 - Se implementa clase Filter para filtrar señales. La clase toma la señal y aplica el filtro en el último eje. Aplica primero un pasabanda y luego un notch. No aplica ventana, de momento no deja elegir entre FIR o IIR, por defecto aplica IIR.
