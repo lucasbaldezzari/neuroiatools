@@ -40,19 +40,4 @@ class Filter(BaseEstimator, TransformerMixin):
 
 if __name__ == "__main__":
 
-    with open('SignalProcessor/testData/all_left_trials.npy', 'rb') as f:
-        signalleft = np.load(f)
-
-    with open('SignalProcessor/testData/all_right_trials.npy', 'rb') as f:
-        signalright = np.load(f)
-
-    filtro = Filter(lowcut=8.0, highcut=28.0, notch_freq=50.0, notch_width=2.0, sample_rate=100.0)
-
-    signalleftFiltered = filtro.fit_transform(signalleft)
-    sognalrightFiltered = filtro.fit_transform(signalright)
-
-    ### Grafico para comparar señal original y señal filtrada
-    import matplotlib.pyplot as plt
-    plt.plot(signalleftFiltered[0,28,:], label = "Filtrada")
-    plt.plot(signalleft[0,28,:], label = "Original")
-    plt.show()
+    pass
