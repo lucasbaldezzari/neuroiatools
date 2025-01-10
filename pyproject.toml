@@ -1,6 +1,6 @@
 [project]
 name = "neuroiatools"
-version = "1.1.9"
+version = "1.2.0"
 
 authors = [
   {name = "Lucas Baldezzari", email = "lucas.baldezzari@utec.edu.uy"}

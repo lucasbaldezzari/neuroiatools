@@ -1,3 +1,7 @@
+#### 1.2.0
+
+- Se implementa método plotEEG.
+
 #### 1.1.9
 
 - Se implementa y testea método _rejectTrials de la clase TrialsHandler. 

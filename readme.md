@@ -14,6 +14,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.1.9
+#### 1.2.0
 
-- Se implementa y testea método _rejectTrials de la clase TrialsHandler. 
+- Se implementa método plotEEG.

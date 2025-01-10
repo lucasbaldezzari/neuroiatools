@@ -1,9 +1,8 @@
-python>=3.10
-numpy
-matplotlib
-seaborn
-pandas
-h5py
-scipy
-scikit-learn
-mne
+numpy>=2.0.1
+mne>=1.9.0
+matplotlib>=3.4.0
+pandas>=2.2.2
+scipy>=1.7.0
+scikit-learn>=0.24.0
+seaborn>=0.11.0
+h5py>=3.0.0
