@@ -1,3 +1,7 @@
+#### 1.3.0
+
+- Se implementan los métodos *tfr.compute_tfr*, *tfr.plotTFRERDS* y *tfr.plotERDSLines* en SignalProcessor.
+
 #### 1.2.0
 
 - Se implementa método plotEEG.

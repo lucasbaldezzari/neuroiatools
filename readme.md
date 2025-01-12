@@ -14,6 +14,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.2.0
+#### 1.3.0
 
-- Se implementa método plotEEG.
+- Se implementan los métodos *tfr.compute_tfr*, *tfr.plotTFRERDS* y *tfr.plotERDSLines* en SignalProcessor.

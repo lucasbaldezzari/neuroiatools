@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: neuroiatools
-Version: 1.2.0
+Version: 1.3.0
 Summary: Tools for EEG processing and analysis
 Home-page: https://github.com/lucasbaldezzari/neuroiatools
 Author: LUCAS BALDEZZARI
@@ -45,6 +45,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.2.0
+#### 1.3.0
 
-- Se implementa método plotEEG.
+- Se implementan los métodos *tfr.compute_tfr*, *tfr.plotTFRERDS* y *tfr.plotERDSLines* en SignalProcessor.
