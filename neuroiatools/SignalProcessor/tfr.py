@@ -6,8 +6,8 @@ from matplotlib.colors import TwoSlopeNorm
 import seaborn as sns
 import pandas as pd
 
-def compute_tfr(data, sfreq, event_times, event_labels, tmin, tmax, fmin, fmax, n_cycles=7, decim=1, num_freqs=30,
-                    channel_names=None, pick_channels=None, reject=None, baseline=None, baseline_mode = "percent",
+def compute_tfr(data, event_times, event_labels, tmin, tmax, fmin, fmax, n_cycles=7, decim=1, num_freqs=30,
+                pick_channels=None, reject=None, baseline=None, baseline_mode = "percent",
                     baseline_cropping = (-1.5,0.5)):
     """
     Esta función calcula la representación de frecuencia de tiempo (TFR) de datos EEG epocados.
@@ -18,10 +18,8 @@ def compute_tfr(data, sfreq, event_times, event_labels, tmin, tmax, fmin, fmax, 
 
     Parameters
     ----------
-    data : np.ndarray
-        Datos EEG de entrada con forma (n_canales, n_muestras).
-    sfreq : float
-        Frecuencia de muestreo de los datos en Hz.
+    data : mne.io.RawArray
+        Datos EEG en forma de objeto mne.io.RawArray.
     event_times : np.ndarray
         Array con los índices de muestra de los eventos.
     event_labels : list o array
@@ -65,20 +63,11 @@ def compute_tfr(data, sfreq, event_times, event_labels, tmin, tmax, fmin, fmax, 
     times : np.ndarray
         Puntos de tiempo utilizados para la TFR en segundos.
     """
-    ##validamos dimensión
-    if data.ndim != 2:
-        raise ValueError("Los datos de entrada deben tener la forma (n_channels, n_samples).")
-
-    ## Creamos un objeto mne
-    n_channels, n_samples = data.shape
-    if channel_names is None:
-        channel_names = [f"{i+1}" for i in range(n_channels)]
-    info = mne.create_info(ch_names=channel_names, sfreq=sfreq, ch_types="eeg")
-
-    ## objeto mne.raw
-    raw = mne.io.RawArray(data, info)
-
-        ## Map event labels to integer IDs
+    ##validamos que rawdata sea un objeto mne.io.RawArray
+    if not isinstance(data, mne.io.RawArray):
+        raise ValueError("data debe ser un objeto mne.io.RawArray.")
+        
+    ## Map event labels to integer IDs
     unique_labels = np.unique(event_labels)
     event_id = {label: idx for idx, label in enumerate(unique_labels)}
     print("Labels de cada evento:",event_id)
@@ -87,7 +76,7 @@ def compute_tfr(data, sfreq, event_times, event_labels, tmin, tmax, fmin, fmax, 
     events = np.array([[int(time), 0, event_id[label]] for time, label in zip(event_times, event_labels)])
 
     ## objeto mneEpochs
-    epochs = mne.Epochs(raw, events, event_id, tmin, tmax, baseline=None, detrend=1, preload=False, picks=pick_channels,reject=reject)
+    epochs = mne.Epochs(data, events, event_id, tmin, tmax, baseline=None, detrend=1, preload=False, picks=pick_channels,reject=reject)
 
     #definimos las frecuencias de interes
     freqs = np.linspace(fmin, fmax, num=num_freqs) ##cantidad de frecuencias entre fmin y fmax
@@ -269,15 +258,16 @@ def plotERDSLines(tfr, channels_order, bands_interest=["alpha", "beta"], title=N
     ##título de la figura
     if title is None:
         title = "Curvas ERDS%"
+    
     g.figure.suptitle(title, fontsize=16)
+    g.figure.subplots_adjust(top=0.9)
 
     ##guardar la figura
     if save:
         if filename is None:
             filename = "ERDS_lines.png"
         g.savefig(filename, dpi=dpi)
-    g.figure.subplots_adjust(top=0.9)
-
+        
     ##mostrar la figura
     if show:
         plt.show()
@@ -373,6 +363,7 @@ def plot_ERDS_topomap(tfr, times, class_interest = None, bands_interest=["alpha"
 
 if __name__ == "__main__":
     from neuroiatools.SignalProcessor import Filter
+    from neuroiatools.EEGManager.RawArray import makeRawData
     import h5py
     import numpy as np
     import pandas as pd

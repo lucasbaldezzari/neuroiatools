@@ -1,5 +1,6 @@
 from neuroiatools.SignalProcessor import Filter
 from neuroiatools.SignalProcessor.tfr import compute_tfr, plot_ERDS_topomap
+from neuroiatools.EEGManager.RawArray import makeRawData
 import h5py
 import numpy as np
 import mne
@@ -26,11 +27,6 @@ tmax = 5
 dt = 0.5
 fmin = 5     # Frecuencia mínima de interés
 fmax = 36    # Frecuencia máxima de interés
-
-###Creación de un Montage para el posicionamiento de los electrodos
-montage = mne.channels.read_custom_montage("tests\\montage.sfp")
-montage.plot(show_names=True)
-# montage.ch_names ##nombres de los electrodos
  
 ##elecrtodos a usar
 ##***IMPORTANTE***
@@ -41,9 +37,17 @@ ch_names = ['FP1', 'FPz', 'FP2', 'AF7', 'AF3', 'AFz', 'AF4', 'AF8', 'F7', 'F5', 
             'T10', 'TP7', 'CP5', 'CP3', 'CP1', 'CPz', 'CP2', 'CP4', 'CP6', 'TP8', 'P9', 'P7', 'P5', 'P3', 'P1', 'Pz', 'P2',
             'P4', 'P6', 'P8', 'P10', 'PO7', 'PO3', 'POz', 'PO4', 'PO8', 'O1', 'Oz', 'O2']
 
+###Creación de un Montage para el posicionamiento de los electrodos
+montage = mne.channels.read_custom_montage("tests\\montage.sfp")
+montage.plot(show_names=True)
+
+##creamos el objeto RawArray
+rawdata = makeRawData(filtered_eeg, sfreq, channel_names=ch_names, montage=montage)
+rawdata.crop(tmin=33)
+
 ##computo la TFR
 tfr, freqs, times = compute_tfr(
-    filtered_eeg, sfreq, event_times, event_labels, tmin-dt, tmax+dt, fmin, fmax, n_cycles=20, channel_names=ch_names,
+    rawdata, event_times, event_labels, tmin-dt, tmax+dt, fmin, fmax, n_cycles=20,
     reject=None, baseline=(-3,-1), baseline_mode="percent", baseline_cropping=(tmin,tmax) )
 
 ##seteo el montaje
@@ -52,7 +56,7 @@ print(tfr.info['dig'])
 
 ##grafico los mapas topográficos
 times=[-0.5, 0, 0.5,1] ##tiempos en segundos
-class_interest = "DERECHA"
+class_interest = "IZQUIERDA"
 
 plot_ERDS_topomap(
     tfr=tfr,
