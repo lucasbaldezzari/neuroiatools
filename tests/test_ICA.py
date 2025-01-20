@@ -5,6 +5,7 @@ from neuroiatools.SignalProcessor.ICA import getICA
 import h5py
 import numpy as np
 import pandas as pd
+import mne
 
 ##cargo datasets/raweeg_executed_tasks.hdf5
 raweeg = h5py.File("datasets\\raweeg_executed_tasks.hdf5", "r")["raw_eeg"][:63,:] ##no usamos el último canal dado que es EMG
@@ -32,7 +33,7 @@ montage = mne.channels.read_custom_montage("tests\\montage.sfp")
 eeg_data = makeRawData(filtered_eeg, sfreq, channel_names=ch_names, montage=montage, event_times=event_times, event_labels=event_labels)
 eeg_data.crop(tmin=33)
 
-ica = getICA(eeg_data, sfreq, n_components = 30, channel_names=ch_names, montage=montage)
+ica = getICA(eeg_data, n_components = 30)
 ica.plot_sources(eeg_data)
 ica.plot_components()
 
