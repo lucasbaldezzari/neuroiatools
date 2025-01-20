@@ -282,6 +282,95 @@ def plotERDSLines(tfr, channels_order, bands_interest=["alpha", "beta"], title=N
     if show:
         plt.show()
 
+def plot_ERDS_topomap(tfr, times, class_interest = None, bands_interest=["alpha", "beta"],
+                      freq_bounds=None, apply_cnorm=False, vmin=-1, vmax=1.5, title=None, show=True, save=False, filename=None, figsize=(10,10), dpi=300, **kwargs):
+    """
+    Función para generar mapas topográficos y así visualizar patrones ERD/ERS a partir de datos de tiempo-frecuencia.
+
+    Parámetros
+    ----------
+    tfr : mne.time_frequency.EpochsTFR
+        La representación de tiempo-frecuencia de los datos.
+    times : lista o np.ndarray
+        Lista de puntos de tiempo (en segundos) para trazar los mapas topográficos.
+    class_interest : str, opcional
+        Clase de interés. Por defecto es None.
+    bands_interest : lista
+        Lista de bandas de frecuencia de interés.
+    freq_bounds : dict, opcional
+        Diccionario con límites de banda de frecuencia, por ejemplo, {"delta": (0, 3), "theta": (4, 7), "alpha": (8, 13)}. 
+        Por defecto es None.
+    apply_cnorm : bool
+        Indica si se debe aplicar una normalización personalizada a la escala de color.
+    vmin : float
+        Valor mínimo para la escala de color.
+    vmax : float
+        Valor máximo para la escala de color.
+    title : str, opcional
+        Título de la figura. Por defecto es None.
+    show : bool
+        Indica si se debe mostrar la figura.
+    save : bool
+        Indica si se debe guardar la figura.
+    filename : str, opcional
+        Nombre de archivo para guardar la figura. Por defecto es None.
+    dpi : int
+        Resolución de la imagen guardada en puntos por pulgada.
+    kwargs : dict
+        Argumentos clave adicionales para la gráfica.
+
+    Retorna
+    -------
+    None
+    """
+    if freq_bounds is None:
+        freq_bounds = {"delta": (0, 3), "theta": (4, 7), "alpha": (8, 13), "beta": (14, 30), "gamma": (31, 100)}
+    
+    ## Selección de la clase de interés
+    if class_interest is not None:
+        tfr = tfr[class_interest]
+
+    ## Verificar si la TFR contiene múltiples épocas
+    if tfr.data.ndim == 4:
+        ## Promediamos las épocas
+        tfr = tfr.average()
+
+    ## Normalización de colores
+    if apply_cnorm:
+        cnorm = TwoSlopeNorm(vmin=vmin, vcenter=0, vmax=vmax)  # mínimo, centro y máximo para los ERDS
+        vlim = (None, None)
+    else:
+        cnorm = None
+        vlim = (vmin, vmax)
+
+    ## Creamos la figura
+    fig, axes = plt.subplots(len(bands_interest), len(times), figsize=figsize)
+
+    if len(bands_interest) == 1:
+        axes = np.expand_dims(axes, axis=0)
+    if len(times) == 1:
+        axes = np.expand_dims(axes, axis=1)
+
+    for i, band in enumerate(bands_interest):
+        fmin, fmax = freq_bounds.get(band, (None, None))
+        if fmin is None or fmax is None:
+            raise ValueError(f"La banda de frecuencia {band} no se encuentra en freq_bounds.")
+
+        for j, time in enumerate(times):
+            ax = axes[i, j]
+            tfr.plot_topomap(
+                tmin=time, tmax=time, fmin=fmin, fmax=fmax, axes=ax, show=False, cnorm=cnorm, vlim=vlim, **kwargs)
+            ax.set_title(f"{band.capitalize()} banda\n{time:.2f}s", fontsize=10)
+
+    if title:
+        fig.suptitle(title, fontsize=16)
+
+    plt.tight_layout()
+    if save and filename:
+        plt.savefig(filename, dpi=dpi)
+    if show:
+        plt.show()
+
 if __name__ == "__main__":
     from neuroiatools.SignalProcessor import Filter
     import h5py

@@ -19,8 +19,11 @@ neuroiatools/SignalProcessor/__init__.py
 neuroiatools/SignalProcessor/tfr.py
 neuroiatools/utils/__init__.py
 neuroiatools/utils/datasetManager.py
+neuroiatools/utils/montage_manager.py
 tests/test_download_data.py
 tests/test_filter.py
 tests/test_plotEEG.py
+tests/test_plot_erds_topomap.py
 tests/test_tfr.py
 tests/test_trialshandler.py
+tests/test_xml_to_sfp.py
