@@ -36,10 +36,10 @@ tfr, freqs, times = compute_tfr(
     rawdata, event_times, event_labels, tmin-dt, tmax+dt, fmin, fmax, n_cycles=20,
     pick_channels=channels, reject=dict(eeg=60), baseline=(-3,-1), baseline_mode="percent", baseline_cropping=(tmin,tmax) )
 
-files_names = [f"tests\\tfr_chan{ch}.png" for ch in channels]
+files_names = [f"tests\\figures\\tfr_chan{ch}.png" for ch in channels]
 plotTFRERDS(tfr,event_ids=dict(DERECHA=0, IZQUIERDA=1), ch_names=channels, vmin=None, vmax=None,
             show=True, save=True, files_names=files_names, dpi=300, figsize=(16, 6))
 
 plotERDSLines(tfr, channels_order=channels, bands_interest=["alpha", "beta"], title=None,
                 freq_bounds = {"_": 0, "delta": 3, "theta": 7, "alpha": 13, "beta": 35, "gamma": 140}, figsize=(16, 6),
-                color_palette="blend:#8e44ad,#3498db", n_colors=2,show=True,save=True, filename="tests\\erdslines.png", dpi=300)
+                color_palette="blend:#8e44ad,#3498db", n_colors=2,show=True,save=True, filename="tests\\figures\\erdslines.png", dpi=300)

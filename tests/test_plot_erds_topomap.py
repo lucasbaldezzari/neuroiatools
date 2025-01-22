@@ -66,7 +66,7 @@ plot_ERDS_topomap(
     freq_bounds={"alpha": (8, 13), "beta": (14, 30)},
     title=f"Mapas Topográficos ERDS - Mano: {class_interest}",
     show=True,
-    save=True,filename="tests//erds_topomap.png",
+    save=True,filename="tests\\figures\\erds_topomap.png",
     apply_cnorm=True,
     vmin=-1.5,
     vmax=1,
