@@ -1,3 +1,7 @@
+#### 1.4.1
+
+- Cambio menor en documentación de makeRawData
+
 #### 1.4.0
 
 - Se implementan los métodos *tfr.plot_ERDS_topomap* en SignalProcessor y *montage_manager.xml_to_sfp* en *utils*. Se crean test para estos métodos.

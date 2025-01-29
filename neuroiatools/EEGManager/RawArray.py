@@ -48,7 +48,7 @@ def makeRawData(data, sfreq, event_times=None, event_labels=None, channel_names=
 
         rawdata.set_annotations(annotations)
 
-    return rawdata
+    return rawdata ##retornamos el objeto mne.io.RawArray
 
 if __name__ == "__main__":
     import h5py
@@ -72,3 +72,5 @@ if __name__ == "__main__":
 
     ##creamos el objeto RawArray
     rawdata = makeRawData(filtered_eeg, sfreq, event_times, event_labels)
+
+    print(rawdata.ch_names)

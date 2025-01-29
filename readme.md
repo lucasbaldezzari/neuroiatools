@@ -14,6 +14,6 @@ Herramientas de procesamiento y análisis de señales de Electroencefalografía 
 
 ### Última versión
 
-#### 1.4.0
+#### 1.4.1
 
-- Se implementan los métodos *tfr.plot_ERDS_topomap* en SignalProcessor y *montage_manager.xml_to_sfp* en *utils*. Se crean test para estos métodos.
+- Cambio menor en documentación de makeRawData
